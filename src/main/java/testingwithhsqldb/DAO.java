@@ -61,6 +61,20 @@ public class DAO {
             return result;
         }
         
+        public void insertProduct(int productId, String productName, int productPrice) throws SQLException {
+            String sql = "INSERT INTO PRODUCT VALUES (?, ?, ?)";
+            try(Connection connection = myDataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+                stmt.setInt(1,productId);
+                stmt.setString(2, productName);
+                stmt.setInt(3,productPrice);
+                stmt.executeUpdate();
+            } catch(SQLException ex) {
+                Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+                throw new SQLException(ex.getMessage());
+            }
+        }
+        
         
 	
 }
