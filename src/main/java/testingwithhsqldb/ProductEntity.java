@@ -1,14 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package testingwithhsqldb;
 
 /**
- *
- * @author pedago
+ * Correspond à l'enregistrement d'un produit
  */
 public class ProductEntity {
+    private int id;
+    private String name;
+    private int price;
     
+    public ProductEntity(int productId, String productName, int productPrice) {
+        this.id = productId;
+        this.name = productName;
+        this.price = productPrice;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int getPrice() {
+        return price;
+    }
 }
