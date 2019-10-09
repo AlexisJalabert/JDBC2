@@ -69,5 +69,19 @@ public class HsqlDBTest {
 		ds.setUser("sa");
 		ds.setPassword("sa");
 		return ds;
-	}	
+	}
+        
+        @Test
+        public void findExistingProduct() throws SQLException {
+            int productId = 0;
+            ProductEntity result = myObject.findProduct(productId);
+            assertEquals("Iron Iron", result.getName());
+        }
+        
+        @Test
+        public void noProduct() throws SQLException {
+            int productId = 59;
+            ProductEntity result = myObject.findProduct(productId);
+            assertEquals(null, result);
+        }
 }
