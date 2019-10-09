@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 public class DAO {
@@ -38,5 +43,23 @@ public class DAO {
 		// dernière ligne : on renvoie le résultat
 		return result;
 	}
+        
+        ProductEntity findProduct(int productId) throws SQLException {
+            ProductEntity result = null;
+            String sql = "SELECT * FROM PRODUCT WHERE ID = ?";
+            try(Connection connection = myDataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+                stmt.setInt(1, productId);
+                ResultSet rs = stmt.executeQuery();
+                if(rs.next()) {
+                    result = new ProductEntity(rs.getInt("ID"),rs.getString("NAME"),rs.getInt("PRICE"));
+                }
+            } catch(SQLException ex) {
+                
+            }
+            return result;
+        }
+        
+        
 	
 }
