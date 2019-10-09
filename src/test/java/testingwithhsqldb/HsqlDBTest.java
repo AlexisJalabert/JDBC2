@@ -84,4 +84,28 @@ public class HsqlDBTest {
             ProductEntity result = myObject.findProduct(productId);
             assertEquals(null, result);
         }
+        
+        @Test
+        public void productInsert() throws SQLException {
+            int id = 50;
+            String name = "Ding dong";
+            int price = 28;
+            myObject.insertProduct(id,name,price);
+            ProductEntity resultat = myObject.findProduct(id);
+            assertEquals("Ding dong",resultat.getName());
+        }
+        
+        @Test
+        public void PositiveIntegrity() throws SQLException {
+            int id = 51;
+            String name = "Ping pong";
+            int price = -12;
+            try {
+                myObject.insertProduct(id,name,price);
+                fail();
+            } catch(SQLException ex) {
+                
+            }
+            
+        }
 }
